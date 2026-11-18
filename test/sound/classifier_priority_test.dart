@@ -13,9 +13,9 @@ import '../properties/generators.dart';
 
 /// Oracle: independent implementation of the priority order.
 SoundEvent _oracle({
-  required final chess.Move verboseMove,
-  required final bool isGameOverAfter,
-  required final bool isInCheckAfter,
+  required chess.Move verboseMove,
+  required bool isGameOverAfter,
+  required bool isInCheckAfter,
 }) {
   final flags = verboseMove.flags;
   if (isGameOverAfter) return SoundEvent.gameEnd;
@@ -36,7 +36,7 @@ void main() {
   ft.group('Sound classifier priority', () {
     Glados<(chess.Chess, chess.Move)>(any.legalMoveFromRandomPosition).test(
       'prop_classifier_matches_oracle_for_any_legal_move',
-      (final (chess.Chess, chess.Move) pair) {
+      ((chess.Chess, chess.Move) pair) {
         final (game, move) = pair;
         final moves = game.generate_moves();
         if (moves.isEmpty) return; // terminal position — skip

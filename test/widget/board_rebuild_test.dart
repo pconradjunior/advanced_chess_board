@@ -2,13 +2,13 @@
 // Covers §2.8, §2.9. Validates P1.6, P1.7.
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Board auto-rebuild on controller changes', () {
     testWidgets('programmatic move triggers rebuild without external listener',
-        (final tester) async {
+        (tester) async {
       final c = ChessBoardController();
       await tester.pumpWidget(
         MaterialApp(
@@ -25,7 +25,7 @@ void main() {
 
       expect(
         find.byWidgetPredicate(
-          (final w) => w is Draggable<String> && w.data == 'e2',
+          (w) => w is Draggable<String> && w.data == 'e2',
         ),
         findsOneWidget,
       );
@@ -35,24 +35,24 @@ void main() {
 
       expect(
         find.byWidgetPredicate(
-          (final w) => w is Draggable<String> && w.data == 'e4',
+          (w) => w is Draggable<String> && w.data == 'e4',
         ),
         findsOneWidget,
       );
       expect(
         find.byWidgetPredicate(
-          (final w) => w is Draggable<String> && w.data == 'e2',
+          (w) => w is Draggable<String> && w.data == 'e2',
         ),
         findsNothing,
       );
     });
 
     testWidgets('swapping controllers unsubscribes from old, subscribes to new',
-        (final tester) async {
+        (tester) async {
       final a = ChessBoardController();
       final b = ChessBoardController();
 
-      Widget build(final ChessBoardController controller) => MaterialApp(
+      Widget build(ChessBoardController controller) => MaterialApp(
             home: Scaffold(
               body: SizedBox(
                 width: 400,
@@ -77,7 +77,7 @@ void main() {
       // changed but the widget is now on b).
       expect(
         find.byWidgetPredicate(
-          (final w) => w is Draggable<String> && w.data == 'e2',
+          (w) => w is Draggable<String> && w.data == 'e2',
         ),
         findsOneWidget,
       );
@@ -87,7 +87,7 @@ void main() {
       await tester.pumpAndSettle(const Duration(milliseconds: 300));
       expect(
         find.byWidgetPredicate(
-          (final w) => w is Draggable<String> && w.data == 'd4',
+          (w) => w is Draggable<String> && w.data == 'd4',
         ),
         findsOneWidget,
       );

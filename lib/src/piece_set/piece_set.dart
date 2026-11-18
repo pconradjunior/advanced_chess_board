@@ -1,5 +1,5 @@
 import 'package:chess/chess.dart' as chess;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../constants/global_constants.dart';
 import '../constants/image_constants.dart';
@@ -58,7 +58,7 @@ class _ChessDotComPieceSet extends PieceSet {
   const _ChessDotComPieceSet();
 
   @override
-  ImageProvider imageFor(final PlayerColor color, final chess.PieceType type) {
+  ImageProvider imageFor(PlayerColor color, chess.PieceType type) {
     if (color == PlayerColor.white) {
       switch (type) {
         case chess.PieceType.PAWN:
@@ -123,7 +123,7 @@ class _MapBackedPieceSet extends PieceSet {
   final Map<({PlayerColor color, chess.PieceType type}), ImageProvider> _map;
 
   @override
-  ImageProvider imageFor(final PlayerColor color, final chess.PieceType type) {
+  ImageProvider imageFor(PlayerColor color, chess.PieceType type) {
     final key = (color: color, type: type);
     final provider = _map[key];
     if (provider == null) {
@@ -135,7 +135,7 @@ class _MapBackedPieceSet extends PieceSet {
   }
 
   @override
-  bool operator ==(final Object other) {
+  bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! _MapBackedPieceSet) return false;
     for (final color in _canonicalColors) {

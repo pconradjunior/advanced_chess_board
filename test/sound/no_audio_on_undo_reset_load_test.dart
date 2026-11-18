@@ -2,7 +2,7 @@
 // Controller undo/reset/loadGameFromFEN never fires SoundPack.play.
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class _Counter {
@@ -14,7 +14,7 @@ class _CountingSoundPack extends SoundPack {
   final _Counter counter;
 
   @override
-  Future<void> play(final SoundEvent e) async {
+  Future<void> play(SoundEvent e) async {
     counter.value += 1;
   }
 }
@@ -23,7 +23,7 @@ void main() {
   group('No audio on undo/reset/loadGameFromFEN', () {
     testWidgets(
       'undo does not fire SoundPack.play',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final counter = _Counter();
         final pack = _CountingSoundPack(counter);
         final controller = ChessBoardController();
@@ -64,7 +64,7 @@ void main() {
 
     testWidgets(
       'resetBoard does not fire SoundPack.play',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final counter = _Counter();
         final pack = _CountingSoundPack(counter);
         final controller = ChessBoardController();
@@ -101,7 +101,7 @@ void main() {
 
     testWidgets(
       'loadGameFromFEN does not fire SoundPack.play',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final counter = _Counter();
         final pack = _CountingSoundPack(counter);
         final controller = ChessBoardController();
@@ -140,7 +140,7 @@ void main() {
 
     testWidgets(
       'notify:false mutations do not fire SoundPack.play',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final counter = _Counter();
         final pack = _CountingSoundPack(counter);
         final controller = ChessBoardController();

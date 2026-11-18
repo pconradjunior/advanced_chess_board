@@ -8,7 +8,7 @@ import 'dart:math' as math;
 import 'package:advanced_chess_board/advanced_chess_board.dart';
 import 'package:advanced_chess_board/src/widgets/chess_piece_widget.dart';
 import 'package:advanced_chess_board/src/constants/global_constants.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -22,7 +22,7 @@ void main() {
 
       testWidgets(
         'P2.8: feedback size at boardSize=$boardSize is $expectedFeedbackSize',
-        (final WidgetTester tester) async {
+        (WidgetTester tester) async {
           final controller = ChessBoardController();
           await tester.pumpWidget(
             MaterialApp(

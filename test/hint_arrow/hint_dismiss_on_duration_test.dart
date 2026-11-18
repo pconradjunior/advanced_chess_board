@@ -6,14 +6,14 @@ import 'dart:async';
 import 'package:advanced_chess_board/advanced_chess_board.dart';
 import 'package:advanced_chess_board/src/hint/hint_arrow_painter.dart';
 import 'package:fake_async/fake_async.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Hint arrow dismiss on duration', () {
     testWidgets(
       'P1.24: hint persists before duration, dismisses after',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         const hint = HintArrow(
           startSquare: 'g1',
@@ -40,7 +40,7 @@ void main() {
         // Hint should be rendered initially.
         expect(
           find.byWidgetPredicate(
-            (final w) => w is CustomPaint && w.painter is HintArrowPainter,
+            (w) => w is CustomPaint && w.painter is HintArrowPainter,
           ),
           findsOneWidget,
           reason: 'Hint should be rendered initially',
@@ -50,7 +50,7 @@ void main() {
         await tester.pump(const Duration(milliseconds: 1999));
         expect(
           find.byWidgetPredicate(
-            (final w) => w is CustomPaint && w.painter is HintArrowPainter,
+            (w) => w is CustomPaint && w.painter is HintArrowPainter,
           ),
           findsOneWidget,
           reason: 'Hint should still be rendered at 1999ms',
@@ -61,7 +61,7 @@ void main() {
         await tester.pump(); // Allow setState to propagate.
         expect(
           find.byWidgetPredicate(
-            (final w) => w is CustomPaint && w.painter is HintArrowPainter,
+            (w) => w is CustomPaint && w.painter is HintArrowPainter,
           ),
           findsNothing,
           reason: 'Hint should be dismissed after duration elapses',
@@ -72,7 +72,7 @@ void main() {
     test(
       'P1.24: FakeAsync confirms hint dismisses after duration',
       () {
-        FakeAsync().run((final FakeAsync async) {
+        FakeAsync().run((FakeAsync async) {
           // This test verifies the timer fires correctly.
           var timerFired = false;
           Timer(const Duration(seconds: 2), () {

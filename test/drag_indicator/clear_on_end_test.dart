@@ -3,14 +3,14 @@
 // drag-legal ring and drag-illegal tint on the next pumped frame.
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Drag indicator clear on end', () {
     testWidgets(
       'P1.29: no drag indicators after drag ends',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         await tester.pumpWidget(
           MaterialApp(
@@ -28,7 +28,7 @@ void main() {
         // After pumpAndSettle, no drag is active.
         const theme = BoardTheme.classicGreen;
         final illegalTintFinder = find.byWidgetPredicate(
-          (final Widget w) =>
+          (Widget w) =>
               w is ColoredBox && w.color == theme.dragIllegalTintColor,
         );
         expect(illegalTintFinder, findsNothing);

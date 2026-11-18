@@ -34,5 +34,5 @@ class SilentSoundPack extends SoundPack {
   const SilentSoundPack();
 
   @override
-  Future<void> play(final SoundEvent event) => Future<void>.value();
+  Future<void> play(SoundEvent event) => Future<void>.value();
 }

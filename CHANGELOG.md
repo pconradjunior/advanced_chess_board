@@ -1,3 +1,21 @@
+## 3.2.0 — 2026-11-18
+
+### Compatibility
+- Flutter 3.50.0 support. Material widgets moved out of the Flutter SDK into
+  `package:material_ui`, so the widget layer, the example app and the tests now
+  import `package:material_ui/material_ui.dart` instead of
+  `package:flutter/material.dart`. `material_ui` is now a direct dependency.
+- Effective minimum toolchain is now Dart 3.13 / Flutter 3.47, the floor
+  imposed by `material_ui`; the `environment` constraints now declare it
+  explicitly. No public API changed.
+- Analyzer now excludes generated `build/**` output (and the platform host
+  folders in the example app).
+- Test suite compiles again under Dart 3.13+: `final` modifiers on parameters
+  (`(final String fen)`, `{final bool enable = true}`) are not valid Dart and
+  were removed from the test files, and the dispose-contract tests now accept
+  the `StateError` raised by the relocated `ChangeNotifier` in Flutter 3.50
+  (older SDKs raise `FlutterError`). `flutter analyze` is clean.
+
 ## 3.1.0 — 2026-05-02
 
 ### Additions

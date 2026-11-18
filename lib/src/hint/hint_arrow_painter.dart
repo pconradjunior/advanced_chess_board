@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../models/enums.dart';
 import '../theme/board_theme.dart';
@@ -27,7 +27,7 @@ class HintArrowPainter extends CustomPainter {
   final PlayerColor orientation;
 
   @override
-  void paint(final Canvas canvas, final Size size) {
+  void paint(Canvas canvas, Size size) {
     final (sourceRow, sourceCol) =
         getIndexFromSquare(arrow.startSquare, orientation);
     final (destRow, destCol) = getIndexFromSquare(arrow.endSquare, orientation);
@@ -117,7 +117,7 @@ class HintArrowPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant final HintArrowPainter old) {
+  bool shouldRepaint(covariant HintArrowPainter old) {
     return old.arrow != arrow ||
         old.theme.hintArrowColor != theme.hintArrowColor ||
         old.orientation != orientation;

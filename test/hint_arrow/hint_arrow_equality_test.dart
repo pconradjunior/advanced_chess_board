@@ -55,7 +55,7 @@ void main() {
     // PBT: reflexivity.
     Glados<HintArrow>(any.hintArrow).test(
       'prop_equality_reflexive: h == h',
-      (final HintArrow h) {
+      (HintArrow h) {
         ft.expect(h == h, ft.isTrue);
         ft.expect(h.hashCode, ft.equals(h.hashCode));
       },
@@ -64,7 +64,7 @@ void main() {
     // PBT: symmetry.
     Glados2<HintArrow, HintArrow>(any.hintArrow, any.hintArrow).test(
       'prop_equality_symmetric: h1 == h2 implies h2 == h1',
-      (final HintArrow h1, final HintArrow h2) {
+      (HintArrow h1, HintArrow h2) {
         ft.expect(h1 == h2, ft.equals(h2 == h1));
       },
     );

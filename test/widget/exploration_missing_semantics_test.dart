@@ -24,14 +24,14 @@
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
 import 'package:advanced_chess_board/src/widgets/chess_square.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('§1.27 semantics labels on ChessSquare', () {
     testWidgets('first ChessSquare has a descriptive Semantics label',
-        (final tester) async {
+        (tester) async {
       final handle = tester.ensureSemantics();
       final controller = ChessBoardController();
 

@@ -5,14 +5,14 @@
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
 import 'package:advanced_chess_board/src/hint/hint_arrow_painter.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Hint arrow replace resets timer', () {
     testWidgets(
       'P1.25: replacing hint resets the timer',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         const hintA = HintArrow(
           startSquare: 'g1',
@@ -46,7 +46,7 @@ void main() {
         await tester.pump(const Duration(milliseconds: 1000));
         expect(
           find.byWidgetPredicate(
-            (final w) => w is CustomPaint && w.painter is HintArrowPainter,
+            (w) => w is CustomPaint && w.painter is HintArrowPainter,
           ),
           findsOneWidget,
           reason: 'Hint A should still be active at 1000ms',
@@ -74,7 +74,7 @@ void main() {
         await tester.pump(const Duration(milliseconds: 1000));
         expect(
           find.byWidgetPredicate(
-            (final w) => w is CustomPaint && w.painter is HintArrowPainter,
+            (w) => w is CustomPaint && w.painter is HintArrowPainter,
           ),
           findsOneWidget,
           reason: 'Hint B should still be active (timer was reset)',
@@ -85,7 +85,7 @@ void main() {
         await tester.pump(); // Allow setState to propagate.
         expect(
           find.byWidgetPredicate(
-            (final w) => w is CustomPaint && w.painter is HintArrowPainter,
+            (w) => w is CustomPaint && w.painter is HintArrowPainter,
           ),
           findsNothing,
           reason: 'Hint B should be dismissed after its duration elapses',

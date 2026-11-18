@@ -3,7 +3,7 @@
 // children — no GridView, no Scrollable — in every coordinates mode.
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -11,7 +11,7 @@ void main() {
     for (final mode in CoordinateLabels.values) {
       testWidgets(
         'P2.9: no GridView or Scrollable in $mode mode',
-        (final WidgetTester tester) async {
+        (WidgetTester tester) async {
           final controller = ChessBoardController();
           await tester.pumpWidget(
             MaterialApp(

@@ -4,14 +4,14 @@
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
 import 'package:advanced_chess_board/src/widgets/highlight_overlay.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Preservation P2.4: highlights preserved under 3.1.0', () {
     testWidgets(
       'P2.4: last-move highlight uses _effectiveTheme.lastMoveHighlightColor',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         await tester.pumpWidget(
           MaterialApp(
@@ -35,7 +35,7 @@ void main() {
 
         // The last-move highlight color should be present.
         final highlightFinder = find.byWidgetPredicate(
-          (final w) =>
+          (w) =>
               w is ColoredBox &&
               w.color == BoardTheme.classicGreen.lastMoveHighlightColor,
         );
@@ -49,7 +49,7 @@ void main() {
 
     testWidgets(
       'P2.4: HighlightOverlay rendered on legal destinations',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         await tester.pumpWidget(
           MaterialApp(

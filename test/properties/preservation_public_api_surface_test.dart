@@ -3,7 +3,7 @@
 // controller getter set) is preserved in 3.1.0.
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

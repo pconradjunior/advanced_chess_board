@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A directional arrow drawn between two squares on the chess board.
 ///
@@ -13,7 +13,7 @@ class ChessArrow {
   ChessArrow({
     required this.startSquare,
     required this.endSquare,
-    final Color? color,
+    Color? color,
   }) : color = color ?? Colors.amber.withAlpha(128);
 
   /// Algebraic source square, e.g. `"e2"`.
@@ -26,7 +26,7 @@ class ChessArrow {
   final Color? color;
 
   @override
-  bool operator ==(final Object other) {
+  bool operator ==(Object other) {
     return other is ChessArrow &&
         startSquare == other.startSquare &&
         endSquare == other.endSquare &&

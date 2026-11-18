@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:chess/chess.dart' as chess;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../constants/global_constants.dart';
 import '../coordinates/coordinate_labels.dart';
@@ -59,7 +59,7 @@ class ChessSquare extends StatelessWidget {
   final Color? labelColor;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(BuildContext context) {
     final file = square[0];
     final rank = square[1];
     // Labels only render inside the square when coordinates == inside.
@@ -99,9 +99,9 @@ class ChessSquare extends StatelessWidget {
   }
 
   Widget _buildLabel(
-    final String label,
-    final double fontSize,
-    final Color color,
+    String label,
+    double fontSize,
+    Color color,
   ) {
     return Text(
       label,
@@ -109,11 +109,11 @@ class ChessSquare extends StatelessWidget {
     );
   }
 
-  bool _shouldRankBeRendered(final String file) {
+  bool _shouldRankBeRendered(String file) {
     return boardOrientation == PlayerColor.white ? file == 'a' : file == 'h';
   }
 
-  bool _shouldFileBeRendered(final String rank) {
+  bool _shouldFileBeRendered(String rank) {
     return boardOrientation == PlayerColor.white ? rank == '1' : rank == '8';
   }
 }

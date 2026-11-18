@@ -52,12 +52,14 @@ void main() {
       // `LateInitializationError` or NPE originating from `_listener = null`
       // running after super.dispose().
       //
-      // On fixed code this raises `FlutterError` cleanly (super.dispose ran
-      // last; listener field cleanup happened first).
-      FlutterError? caught;
+      // On fixed code this raises the ChangeNotifier disposal error cleanly
+      // (super.dispose ran last; listener field cleanup happened first).
+      // Flutter 3.50 moved ChangeNotifier into `package:listen`, which throws a
+      // StateError; older SDKs throw a FlutterError.
+      Object? caught;
       try {
         controller.addListener(() {});
-      } on FlutterError catch (e) {
+      } on Object catch (e) {
         caught = e;
       }
 
@@ -65,18 +67,18 @@ void main() {
       //   (a) no exception at all (the override doesn't delegate to super);
       //   (b) a different assertion type because _listener was touched after
       //       super.dispose() marked the notifier disposed.
-      // The fixed behaviour is: a clean FlutterError "used after disposed".
+      // The fixed behaviour is: the "used after disposed" error.
       expect(
         caught,
-        isNotNull,
-        reason: 'Registering a listener after dispose should raise a '
-            'FlutterError "used after disposed" — unfixed code may skip this '
-            'check because the override does not delegate to super.',
+        anyOf(isA<FlutterError>(), isA<StateError>()),
+        reason: 'Registering a listener after dispose should raise the '
+            'ChangeNotifier "used after disposed" error — unfixed code may '
+            'skip this check because the override does not delegate to super.',
       );
       expect(
         caught!.toString(),
         contains('disposed'),
-        reason: 'The FlutterError should mention "disposed".',
+        reason: 'The disposal error should mention "disposed".',
       );
     });
   });

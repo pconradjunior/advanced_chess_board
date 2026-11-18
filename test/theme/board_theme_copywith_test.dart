@@ -4,7 +4,7 @@
 // nullable fields works correctly.
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart' as ft;
 import 'package:glados/glados.dart';
 
@@ -82,7 +82,7 @@ void main() {
     // PBT: for any BoardTheme, copyWith with no args returns an equal theme.
     Glados<BoardTheme>(any.boardTheme).test(
       'prop_copywith_no_args_returns_equal_theme',
-      (final BoardTheme t) {
+      (BoardTheme t) {
         final copy = t.copyWith();
         ft.expect(copy, ft.equals(t));
       },
@@ -92,7 +92,7 @@ void main() {
     // updates only that field.
     Glados<BoardTheme>(any.boardTheme).test(
       'prop_copywith_lightSquareColor_updates_only_that_field',
-      (final BoardTheme base) {
+      (BoardTheme base) {
         const c = Color(0xFF112233);
         final copy = base.copyWith(lightSquareColor: c);
         ft.expect(copy.lightSquareColor, ft.equals(c));

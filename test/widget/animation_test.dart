@@ -14,15 +14,15 @@ import 'package:advanced_chess_board/src/widgets/chess_piece_widget.dart';
 import 'package:advanced_chess_board/src/widgets/chess_square.dart';
 // ignore: implementation_imports
 import 'package:advanced_chess_board/src/widgets/move_animation_layer.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 const double _boardSize = 400;
 const double _squareSize = _boardSize / 8;
 
 Future<void> _pumpBoard(
-  final WidgetTester tester,
-  final ChessBoardController c,
+  WidgetTester tester,
+  ChessBoardController c,
 ) async {
   await tester.pumpWidget(
     MaterialApp(
@@ -40,16 +40,16 @@ Future<void> _pumpBoard(
   await tester.pumpAndSettle();
 }
 
-Finder _squareFinder(final String sq) {
+Finder _squareFinder(String sq) {
   return find.byWidgetPredicate(
-    (final w) => w is ChessSquare && w.square == sq,
+    (w) => w is ChessSquare && w.square == sq,
   );
 }
 
 void main() {
   group('Move animation (P1.14 §2.25)', () {
     testWidgets('tap move triggers MoveAnimationLayer with interpolating piece',
-        (final tester) async {
+        (tester) async {
       final c = ChessBoardController();
       await _pumpBoard(tester, c);
 
@@ -57,7 +57,7 @@ void main() {
       // this dispatches to the ChessPieceWidget's onTap handler, which calls
       // _handleTap('e2', squareSize) and selects the pawn).
       final e2PieceFinder = find.byWidgetPredicate(
-        (final w) => w is Draggable<String> && w.data == 'e2',
+        (w) => w is Draggable<String> && w.data == 'e2',
       );
       await tester.tap(e2PieceFinder, warnIfMissed: false);
       await tester.pump();
@@ -130,13 +130,13 @@ void main() {
     });
 
     testWidgets('drag-drop move does NOT produce a MoveAnimationLayer',
-        (final tester) async {
+        (tester) async {
       final c = ChessBoardController();
       await _pumpBoard(tester, c);
 
       // Find the e2 pawn's Draggable.
       final e2Finder = find.byWidgetPredicate(
-        (final w) => w is Draggable<String> && w.data == 'e2',
+        (w) => w is Draggable<String> && w.data == 'e2',
       );
       expect(e2Finder, findsOneWidget);
 
@@ -176,7 +176,7 @@ void main() {
       await tester.pumpAndSettle(const Duration(milliseconds: 300));
       expect(
         find.byWidgetPredicate(
-          (final w) => w is Draggable<String> && w.data == 'e4',
+          (w) => w is Draggable<String> && w.data == 'e4',
         ),
         findsOneWidget,
         reason: 'Drag-drop commits the move: e4 Draggable must exist.',

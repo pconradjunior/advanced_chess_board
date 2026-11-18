@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A translucent hint drawn on a square to indicate it is a legal
 /// destination for the currently-selected piece.
@@ -31,7 +31,7 @@ class HighlightOverlay extends StatelessWidget {
   final Color color;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(BuildContext context) {
     final smallDotSize = squareSize * 0.3;
     final circleSize = squareSize * 0.98;
     return Align(

@@ -2,7 +2,7 @@
 // Mated-king tint + in-check tint preserved.
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 // Fool's mate FEN.
@@ -13,7 +13,7 @@ void main() {
   group('Preservation P2.6: mate/check tint preserved', () {
     testWidgets(
       'P2.6: mated king tint uses default Color(0x9BF44336)',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController()
           ..loadGameFromFEN(_kFoolsMateFen, notify: false);
 
@@ -34,7 +34,7 @@ void main() {
 
         // The checkmate tint should be rendered.
         final tintFinder = find.byWidgetPredicate(
-          (final w) => w is ColoredBox && w.color == const Color(0x9BF44336),
+          (w) => w is ColoredBox && w.color == const Color(0x9BF44336),
         );
         expect(
           tintFinder,
@@ -46,7 +46,7 @@ void main() {
 
     testWidgets(
       'P2.6: legacy kingBackgroundColorOnCheckmate wins over boardTheme',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController()
           ..loadGameFromFEN(_kFoolsMateFen, notify: false);
         const customColor = Color(0xFF112233);
@@ -69,7 +69,7 @@ void main() {
 
         // The custom color should be used.
         final tintFinder = find.byWidgetPredicate(
-          (final w) => w is ColoredBox && w.color == customColor,
+          (w) => w is ColoredBox && w.color == customColor,
         );
         expect(
           tintFinder,
@@ -81,7 +81,7 @@ void main() {
 
     testWidgets(
       'P2.6: in-check tint fires when kingCheckColor is non-null',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         // White king in check from black queen.
         const inCheckFen = '4k3/8/8/8/8/8/8/4K2q w - - 0 1';
         final controller = ChessBoardController()
@@ -107,7 +107,7 @@ void main() {
         if (controller.isInCheck) {
           // The check tint should be rendered.
           final tintFinder = find.byWidgetPredicate(
-            (final w) => w is ColoredBox && w.color == checkColor,
+            (w) => w is ColoredBox && w.color == checkColor,
           );
           expect(
             tintFinder,

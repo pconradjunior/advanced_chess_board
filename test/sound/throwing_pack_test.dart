@@ -3,7 +3,7 @@
 // next build runs normally and no exception propagates to the tester.
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class _ThrowingSoundPack extends SoundPack {
@@ -11,7 +11,7 @@ class _ThrowingSoundPack extends SoundPack {
   final bool throwSync;
 
   @override
-  Future<void> play(final SoundEvent e) {
+  Future<void> play(SoundEvent e) {
     if (throwSync) {
       throw StateError('sync boom from SoundPack.play');
     }
@@ -23,7 +23,7 @@ void main() {
   group('Throwing SoundPack is swallowed', () {
     testWidgets(
       'P1.19: synchronous throw from SoundPack.play does not propagate',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         final pack = _ThrowingSoundPack(throwSync: true);
 
@@ -71,7 +71,7 @@ void main() {
 
     testWidgets(
       'P1.19: async throw from SoundPack.play does not propagate',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         final pack = _ThrowingSoundPack(throwSync: false);
 

@@ -7,7 +7,7 @@ import 'package:advanced_chess_board/advanced_chess_board.dart';
 import 'package:advanced_chess_board/src/constants/global_constants.dart';
 import 'package:advanced_chess_board/src/widgets/chess_piece_widget.dart';
 import 'package:chess/chess.dart' as chess;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Map<({PlayerColor color, chess.PieceType type}), ImageProvider>
@@ -36,7 +36,7 @@ void main() {
   group('Custom PieceSet drives every rendered piece', () {
     testWidgets(
       'board with custom PieceSet renders ChessPieceWidgets with that set',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final customMap = _buildTransparentMap();
         final customSet = PieceSet.fromAssetMap(customMap);
         final controller = ChessBoardController();
@@ -73,7 +73,7 @@ void main() {
 
     testWidgets(
       'default board uses PieceSet.chessDotCom',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
 
         await tester.pumpWidget(

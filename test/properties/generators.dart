@@ -17,7 +17,7 @@ import 'dart:math' as math;
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
 import 'package:chess/chess.dart' as chess;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:glados/glados.dart';
 
 /// Small palette used by `any.chessArrow`. Keeps counterexamples readable.
@@ -62,7 +62,7 @@ extension ChessGenerators on Any {
   /// the standard starting position.
   ///
   /// Uses the PBT `Random` instance so counterexamples are reproducible.
-  Generator<String> get chessFen => (final math.Random random, final int size) {
+  Generator<String> get chessFen => (math.Random random, int size) {
         final rng = math.Random(random.nextInt(1 << 31));
         final game = chess.Chess();
         final plies = rng.nextInt(41); // 0..40 inclusive
@@ -85,7 +85,7 @@ extension ChessGenerators on Any {
 
   /// Random `ChessArrow` with `(from, to, color)` drawn from a small palette.
   Generator<ChessArrow> get chessArrow =>
-      (final math.Random random, final int size) {
+      (math.Random random, int size) {
         final from = any.chessSquare(random, size);
         final to = any.chessSquare(random, size);
         final color = any.choose(_arrowColorPalette)(random, size);
@@ -115,7 +115,7 @@ extension ChessGenerators on Any {
   /// probability so the "default" path is exercised alongside randomised
   /// themes.
   Generator<BoardTheme> get boardTheme =>
-      (final math.Random random, final int size) {
+      (math.Random random, int size) {
         // 20% chance of returning a preset.
         if (random.nextInt(5) == 0) {
           final presets = <BoardTheme>[
@@ -155,7 +155,7 @@ extension ChessGenerators on Any {
   /// [PieceSet.fromAssetMap] built against a static 12-entry map of
   /// transparent [MemoryImage]s.
   Generator<PieceSet> get pieceSet =>
-      (final math.Random random, final int size) {
+      (math.Random random, int size) {
         final set = random.nextBool()
             ? PieceSet.chessDotCom
             : PieceSet.fromAssetMap(_staticPieceMap);
@@ -174,7 +174,7 @@ extension ChessGenerators on Any {
 
   /// Random [HintArrow] with random squares and optional duration.
   Generator<HintArrow> get hintArrow =>
-      (final math.Random random, final int size) {
+      (math.Random random, int size) {
         final from = any.chessSquare(random, size);
         final to = any.chessSquare(random, size);
         final hasDuration = random.nextBool();
@@ -198,7 +198,7 @@ extension ChessGenerators on Any {
   /// Returns a `(chess.Chess, chess.Move)` record. Used by the sound
   /// classifier PBT (Task 7.7).
   Generator<(chess.Chess, chess.Move)> get legalMoveFromRandomPosition =>
-      (final math.Random random, final int size) {
+      (math.Random random, int size) {
         final rng = math.Random(random.nextInt(1 << 31));
         final game = chess.Chess();
         final plies = rng.nextInt(41);

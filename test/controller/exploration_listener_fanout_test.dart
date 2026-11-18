@@ -52,7 +52,7 @@ void main() {
     // per successful mutation.
     Glados<int>(
       any.intInRange(2, 11), // 2..10 inclusive (upper bound is exclusive)
-    ).test('every listener fires exactly once for any n in [2, 10]', (final n) {
+    ).test('every listener fires exactly once for any n in [2, 10]', (n) {
       final controller = ChessBoardController();
       final counters = List<int>.filled(n, 0);
       for (var i = 0; i < n; i++) {

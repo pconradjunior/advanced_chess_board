@@ -3,14 +3,14 @@
 // and allocates no gutter SizedBox.
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('CoordinateLabels.none', () {
     testWidgets(
       'P1.13: none mode renders no coordinate labels',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         await tester.pumpWidget(
           MaterialApp(
@@ -30,7 +30,7 @@ void main() {
 
         // No Text widgets with single-letter coordinate labels.
         final coordinateLabelFinder = find.byWidgetPredicate(
-          (final w) =>
+          (w) =>
               w is Text &&
               w.data != null &&
               RegExp(r'^[a-h]$|^[1-8]$').hasMatch(w.data!),
@@ -45,7 +45,7 @@ void main() {
 
     testWidgets(
       'none mode does not overflow',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         await tester.pumpWidget(
           MaterialApp(

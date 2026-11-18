@@ -7,11 +7,11 @@ import 'dart:typed_data';
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
 import 'package:chess/chess.dart' as chess;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Map<({PlayerColor color, chess.PieceType type}), ImageProvider> _buildMap(
-    final ImageProvider provider) {
+    ImageProvider provider) {
   final map = <({PlayerColor color, chess.PieceType type}), ImageProvider>{};
   for (final color in PlayerColor.values) {
     for (final type in const <chess.PieceType>[

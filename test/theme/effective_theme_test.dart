@@ -6,7 +6,7 @@
 // ); every other field passes through from `theme` untouched.
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart' as ft;
 import 'package:glados/glados.dart';
 
@@ -18,7 +18,7 @@ void main() {
     // _effectiveTheme == BoardTheme.classicGreen.
     ft.testWidgets(
       'P1.4: classicGreen + no legacy overrides => effectiveTheme == classicGreen',
-      (final ft.WidgetTester tester) async {
+      (ft.WidgetTester tester) async {
         final controller = ChessBoardController();
         await tester.pumpWidget(
           MaterialApp(
@@ -44,7 +44,7 @@ void main() {
     // Legacy lightSquareColor wins over boardTheme.lightSquareColor.
     ft.testWidgets(
       'legacy lightSquareColor wins over boardTheme.lightSquareColor',
-      (final ft.WidgetTester tester) async {
+      (ft.WidgetTester tester) async {
         final controller = ChessBoardController();
         const legacyLight = Color(0xFF112233);
         const theme = BoardTheme(lightSquareColor: Color(0xFF998877));
@@ -85,7 +85,7 @@ void main() {
     // Legacy darkSquareColor wins over boardTheme.darkSquareColor.
     ft.testWidgets(
       'legacy darkSquareColor wins over boardTheme.darkSquareColor',
-      (final ft.WidgetTester tester) async {
+      (ft.WidgetTester tester) async {
         final controller = ChessBoardController();
         const legacyDark = Color(0xFF445566);
         const theme = BoardTheme(darkSquareColor: Color(0xFF998877));
@@ -117,7 +117,7 @@ void main() {
     // Legacy kingBackgroundColorOnCheckmate wins over boardTheme.kingCheckmateColor.
     ft.testWidgets(
       'legacy kingBackgroundColorOnCheckmate wins over boardTheme.kingCheckmateColor',
-      (final ft.WidgetTester tester) async {
+      (ft.WidgetTester tester) async {
         final controller = ChessBoardController();
         const legacyMate = Color(0xFF778899);
         const theme = BoardTheme(kingCheckmateColor: Color(0xFF998877));
@@ -149,7 +149,7 @@ void main() {
     // When kingBackgroundColorOnCheckmate is null, boardTheme.kingCheckmateColor is used.
     ft.testWidgets(
       'null kingBackgroundColorOnCheckmate falls back to boardTheme.kingCheckmateColor',
-      (final ft.WidgetTester tester) async {
+      (ft.WidgetTester tester) async {
         final controller = ChessBoardController();
         const themeColor = Color(0xFF998877);
         const theme = BoardTheme(kingCheckmateColor: themeColor);
@@ -180,7 +180,7 @@ void main() {
     // PBT: for any boardTheme, the non-legacy fields pass through unchanged.
     Glados<BoardTheme>(any.boardTheme).test(
       'prop_effective_theme_non_legacy_fields_pass_through',
-      (final BoardTheme theme) {
+      (BoardTheme theme) {
         // Compute the effective theme manually using the same formula.
         final effective = theme.copyWith(
           lightSquareColor: const Color(0xFFEBECD0), // default legacy value

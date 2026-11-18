@@ -3,7 +3,7 @@
 // because notify-false moves don't flow through _makeMove.
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class _Counter {
@@ -15,7 +15,7 @@ class _CountingSoundPack extends SoundPack {
   final _Counter counter;
 
   @override
-  Future<void> play(final SoundEvent e) async {
+  Future<void> play(SoundEvent e) async {
     counter.value += 1;
   }
 }
@@ -24,7 +24,7 @@ void main() {
   group('No audio on makeMove notify:false', () {
     testWidgets(
       'P1.18: controller.makeMove(notify:false) does not fire SoundPack.play',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final counter = _Counter();
         final pack = _CountingSoundPack(counter);
         final controller = ChessBoardController();

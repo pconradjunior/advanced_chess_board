@@ -19,7 +19,7 @@ void main() {
     // Listener count drawn from [1, 10].
     Glados<int>(any.intInRange(1, 11)).test(
       'prop_multi_listener_fanout: all listeners fire exactly once',
-      (final int n) {
+      (int n) {
         final c = ChessBoardController();
         final counters = List<int>.filled(n, 0);
         for (var i = 0; i < n; i++) {
@@ -43,7 +43,7 @@ void main() {
     // reachable position (§2.13).
     Glados<String>(any.chessFen).test(
       'prop_controller_getters_match_game: every getter agrees with game',
-      (final String fen) {
+      (String fen) {
         final c = ChessBoardController();
         c.loadGameFromFEN(fen, notify: false);
 
@@ -70,7 +70,7 @@ void main() {
     // the first legal move with `notify: false` fires zero listener calls.
     Glados<String>(any.chessFen).test(
       'prop_notify_false_suppresses: zero notifications on any legal move',
-      (final String fen) {
+      (String fen) {
         final c = ChessBoardController();
         c.loadGameFromFEN(fen, notify: false);
 

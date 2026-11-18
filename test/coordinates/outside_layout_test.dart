@@ -3,14 +3,14 @@
 // reverses gutter label order; AspectRatio(1) wraps the playing grid only.
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('CoordinateLabels.outside layout', () {
     testWidgets(
       'P1.12: playing grid is square (AspectRatio(1) preserved)',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         await tester.pumpWidget(
           MaterialApp(
@@ -30,7 +30,7 @@ void main() {
 
         // The AspectRatio widget wrapping the playing grid should be present.
         final aspectRatioFinder = find.byWidgetPredicate(
-          (final w) => w is AspectRatio && w.aspectRatio == 1.0,
+          (w) => w is AspectRatio && w.aspectRatio == 1.0,
         );
         expect(
           aspectRatioFinder,
@@ -42,7 +42,7 @@ void main() {
 
     testWidgets(
       'outside mode renders board without overflow',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         await tester.pumpWidget(
           MaterialApp(
@@ -67,7 +67,7 @@ void main() {
 
     testWidgets(
       'P1.11: white orientation rank gutter has 8 to 1 top-to-bottom',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         await tester.pumpWidget(
           MaterialApp(
@@ -90,7 +90,7 @@ void main() {
         final rankTexts = tester
             .widgetList<Text>(find.byType(Text))
             .where(
-              (final t) =>
+              (t) =>
                   t.data != null && RegExp(r'^[1-8]$').hasMatch(t.data!),
             )
             .toList();
@@ -102,7 +102,7 @@ void main() {
 
     testWidgets(
       'P1.11: black orientation rank gutter has 1 to 8 top-to-bottom',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         await tester.pumpWidget(
           MaterialApp(

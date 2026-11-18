@@ -5,14 +5,14 @@
 import 'package:advanced_chess_board/advanced_chess_board.dart';
 import 'package:advanced_chess_board/src/hint/hint_arrow_painter.dart';
 import 'package:advanced_chess_board/src/utils/arrow_painter.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('HintArrowPainter layer order', () {
     testWidgets(
       'P1.21: HintArrowPainter CustomPaint is above ArrowPainter CustomPaint',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         const hint = HintArrow(startSquare: 'g1', endSquare: 'f3');
 
@@ -76,7 +76,7 @@ void main() {
 
     testWidgets(
       'no HintArrowPainter when hintArrow is null',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
 
         await tester.pumpWidget(
@@ -93,7 +93,7 @@ void main() {
         await tester.pumpAndSettle();
 
         final hintPainterFinder = find.byWidgetPredicate(
-          (final w) => w is CustomPaint && w.painter is HintArrowPainter,
+          (w) => w is CustomPaint && w.painter is HintArrowPainter,
         );
         expect(hintPainterFinder, findsNothing);
       },

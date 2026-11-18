@@ -1,11 +1,11 @@
 import 'package:chess/chess.dart' as chess;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../models/enums.dart';
 import '../piece_set/piece_set.dart';
 
 /// Maps a [chess.Color] to the corresponding [PlayerColor].
-PlayerColor _playerColorOf(final chess.Color c) {
+PlayerColor _playerColorOf(chess.Color c) {
   return c == chess.Color.WHITE ? PlayerColor.white : PlayerColor.black;
 }
 
@@ -15,7 +15,7 @@ PlayerColor _playerColorOf(final chess.Color c) {
 /// in an [Image] with [BoxFit.contain]. This replaces the old
 /// `getChessPieceWidget` helper and decouples piece rendering from the
 /// hard-coded asset paths.
-Widget buildPieceWidget(final chess.Piece piece, final PieceSet set) {
+Widget buildPieceWidget(chess.Piece piece, PieceSet set) {
   return Image(
     image: set.imageFor(_playerColorOf(piece.color), piece.type),
     fit: BoxFit.contain,
@@ -24,7 +24,7 @@ Widget buildPieceWidget(final chess.Piece piece, final PieceSet set) {
 
 /// Returns the single-character piece letter used by the `chess` package's
 /// move API (`'q'`, `'r'`, `'b'`, `'n'`, `'p'`, `'k'`).
-String pieceTypeToString(final chess.PieceType pieceType) {
+String pieceTypeToString(chess.PieceType pieceType) {
   switch (pieceType) {
     case chess.PieceType.BISHOP:
       return 'b';
@@ -45,7 +45,7 @@ String pieceTypeToString(final chess.PieceType pieceType) {
 
 /// Returns a human-readable descriptive label for [piece], e.g. "white pawn"
 /// or "black knight". Used by the board's [Semantics] wrappers.
-String pieceSemanticsLabel(final chess.Piece? piece) {
+String pieceSemanticsLabel(chess.Piece? piece) {
   if (piece == null) return 'empty';
   final colorWord = piece.color == chess.Color.WHITE ? 'white' : 'black';
   final typeWord = switch (piece.type) {

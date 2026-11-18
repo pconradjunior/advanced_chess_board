@@ -6,11 +6,11 @@
 import 'package:advanced_chess_board/advanced_chess_board.dart';
 import 'package:advanced_chess_board/src/widgets/chess_piece_widget.dart';
 import 'package:chess/chess.dart' as chess;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Map<({PlayerColor color, chess.PieceType type}), ImageProvider> _buildMap(
-    final int seed) {
+    int seed) {
   // Use AssetImage from the package - these are always valid.
   // Different seeds use different piece images to ensure the sets are distinct.
   final paths = seed == 1
@@ -54,7 +54,7 @@ void main() {
   group('PieceSet precache', () {
     testWidgets(
       'swapping pieceSet triggers rebuild with new set',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         final map1 = _buildMap(1);
         final map2 = _buildMap(2);
@@ -115,7 +115,7 @@ void main() {
 
     testWidgets(
       'same pieceSet across rebuild does not trigger extra precache',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         final map = _buildMap(1);
         final set = PieceSet.fromAssetMap(map);

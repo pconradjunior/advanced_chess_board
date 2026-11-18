@@ -2,12 +2,12 @@
 // Covers §2.22, §2.27.
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Board layout', () {
-    testWidgets('no GridView in the board subtree', (final tester) async {
+    testWidgets('no GridView in the board subtree', (tester) async {
       final c = ChessBoardController();
       await tester.pumpWidget(
         MaterialApp(
@@ -32,7 +32,7 @@ void main() {
     });
 
     testWidgets('board subtree has 8 Rows (one per rank)',
-        (final tester) async {
+        (tester) async {
       final c = ChessBoardController();
       await tester.pumpWidget(
         MaterialApp(

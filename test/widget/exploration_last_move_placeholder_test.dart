@@ -27,13 +27,13 @@
 // -----------------------------------------------------------------------------
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('§1.19 empty Container placeholders from _buildLastMoveHighlight', () {
     testWidgets('no empty Container() placeholders after a move',
-        (final tester) async {
+        (tester) async {
       final controller = ChessBoardController();
 
       await tester.pumpWidget(
@@ -55,7 +55,7 @@ void main() {
       // Find all Container widgets that are "empty" (no color, no decoration,
       // no child, no padding, no constraints). These are the placeholders
       // emitted by the buggy `_buildLastMoveHighlight` fall-through.
-      final emptyContainerFinder = find.byWidgetPredicate((final w) {
+      final emptyContainerFinder = find.byWidgetPredicate((w) {
         if (w is! Container) return false;
         return w.color == null &&
             w.decoration == null &&

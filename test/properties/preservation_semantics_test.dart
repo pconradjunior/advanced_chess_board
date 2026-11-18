@@ -5,14 +5,14 @@
 import 'package:advanced_chess_board/advanced_chess_board.dart';
 import 'package:advanced_chess_board/src/widgets/chess_piece_widget.dart';
 import 'package:advanced_chess_board/src/widgets/chess_square.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Preservation P2.10: semantics labels preserved', () {
     testWidgets(
       'P2.10: ChessSquare semantics labels are correct',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         await tester.pumpWidget(
           MaterialApp(
@@ -30,7 +30,7 @@ void main() {
         // Find ChessSquare for e1 (white king's starting square).
         final e1Square = tester.widget<ChessSquare>(
           find.byWidgetPredicate(
-            (final w) => w is ChessSquare && w.square == 'e1',
+            (w) => w is ChessSquare && w.square == 'e1',
           ),
         );
         expect(e1Square.square, equals('e1'));
@@ -39,7 +39,7 @@ void main() {
 
     testWidgets(
       'P2.10: ChessPieceWidget semantics labels are correct',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         await tester.pumpWidget(
           MaterialApp(

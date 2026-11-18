@@ -3,7 +3,7 @@
 // P1.5: All 10 pairwise combinations of the 5 presets are distinct.
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

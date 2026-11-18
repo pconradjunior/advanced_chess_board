@@ -214,23 +214,27 @@ void main() {
     // option "keep it in controller/"). After the Task 4 fix, super.dispose()
     // runs LAST and addListener is no longer shadowed, so the inherited
     // ChangeNotifier post-dispose assertion reports disposal cleanly.
+    //
+    // Flutter 3.50 moved ChangeNotifier into `package:listen`, whose
+    // `debugAssertNotDisposed` raises a StateError; older SDKs raise a
+    // FlutterError. Both carry the same "used after being disposed" message.
     test('dispose is idempotent and post-dispose addListener throws', () {
       final controller = ChessBoardController()..addListener(() {});
 
       expect(controller.dispose, returnsNormally);
 
-      FlutterError? caught;
+      Object? caught;
       try {
         controller.addListener(() {});
-      } on FlutterError catch (e) {
+      } on Object catch (e) {
         caught = e;
       }
       expect(
         caught,
-        isNotNull,
-        reason: 'Post-dispose addListener must raise a FlutterError '
-            '("used after disposed") — confirms super.dispose() ran last and '
-            'addListener is no longer shadowed.',
+        anyOf(isA<FlutterError>(), isA<StateError>()),
+        reason: 'Post-dispose addListener must raise the ChangeNotifier '
+            'disposal error ("used after disposed") — confirms super.dispose() '
+            'ran last and addListener is no longer shadowed.',
       );
       expect(caught!.toString(), contains('disposed'));
     });

@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../models/chess_arrow.dart';
 import '../models/enums.dart';
@@ -24,7 +24,7 @@ class ArrowPainter extends CustomPainter {
   final PlayerColor boardOrientation;
 
   @override
-  void paint(final Canvas canvas, final Size size) {
+  void paint(Canvas canvas, Size size) {
     for (final arrow in arrows) {
       final (sourceRow, sourceCol) =
           getIndexFromSquare(arrow.startSquare, boardOrientation);

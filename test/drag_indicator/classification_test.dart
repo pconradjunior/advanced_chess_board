@@ -3,14 +3,14 @@
 // non-source and legality of (source → hover) matches the indicator.
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Drag indicator classification', () {
     testWidgets(
       'P1.28: no indicators when enableMoves is false',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         await tester.pumpWidget(
           MaterialApp(
@@ -31,7 +31,7 @@ void main() {
         // No drag indicators should be present.
         const theme = BoardTheme.classicGreen;
         final illegalTintFinder = find.byWidgetPredicate(
-          (final Widget w) =>
+          (Widget w) =>
               w is ColoredBox && w.color == theme.dragIllegalTintColor,
         );
         expect(illegalTintFinder, findsNothing);
@@ -40,7 +40,7 @@ void main() {
 
     testWidgets(
       'board renders without drag indicators when no drag is active',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         await tester.pumpWidget(
           MaterialApp(
@@ -58,7 +58,7 @@ void main() {
         // No drag indicators should be present when no drag is active.
         const theme = BoardTheme.classicGreen;
         final illegalTintFinder = find.byWidgetPredicate(
-          (final Widget w) =>
+          (Widget w) =>
               w is ColoredBox && w.color == theme.dragIllegalTintColor,
         );
         expect(illegalTintFinder, findsNothing);

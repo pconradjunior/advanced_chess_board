@@ -1,5 +1,5 @@
 import 'package:chess/chess.dart' as chess;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../models/enums.dart';
 import '../piece_set/piece_set.dart';
@@ -69,7 +69,7 @@ class _MoveAnimationLayerState extends State<MoveAnimationLayer> {
     });
   }
 
-  Offset _offsetForSquare(final String square) {
+  Offset _offsetForSquare(String square) {
     final file = square.codeUnitAt(0) - 'a'.codeUnitAt(0);
     final rank = int.parse(square[1]);
     final col = widget.orientation == PlayerColor.white ? file : 7 - file;
@@ -78,7 +78,7 @@ class _MoveAnimationLayerState extends State<MoveAnimationLayer> {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(BuildContext context) {
     final from = _offsetForSquare(widget.fromSquare);
     final to = _offsetForSquare(widget.toSquare);
     final current = _started ? to : from;

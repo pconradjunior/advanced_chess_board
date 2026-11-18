@@ -59,14 +59,14 @@
 // -----------------------------------------------------------------------------
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('§1.17 / §1.18 redundant setState on no-op tap', () {
     testWidgets(
         'Scenario A (§1.17): enableMoves: false tap does not schedule a '
-        'frame', (final tester) async {
+        'frame', (tester) async {
       // Documented as PASSING on unfixed code — the early-return is already
       // in place. We include the test so regressions that remove the
       // early-return are caught.
@@ -104,7 +104,7 @@ void main() {
 
     testWidgets(
         'Scenario B (§1.18): empty-square tap with no selection does not '
-        'schedule a frame', (final tester) async {
+        'schedule a frame', (tester) async {
       final controller = ChessBoardController();
 
       await tester.pumpWidget(

@@ -21,9 +21,9 @@ import 'sound_event.dart';
 /// | `chess.Chess.BITS_KSIDE_CASTLE` | 32    | kingside castling              |
 /// | `chess.Chess.BITS_QSIDE_CASTLE` | 64    | queenside castling             |
 SoundEvent classifySoundEvent({
-  required final chess.Move verboseMove,
-  required final bool isGameOverAfter,
-  required final bool isInCheckAfter,
+  required chess.Move verboseMove,
+  required bool isGameOverAfter,
+  required bool isInCheckAfter,
 }) {
   final flags = verboseMove.flags;
 

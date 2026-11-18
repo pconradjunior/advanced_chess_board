@@ -26,7 +26,7 @@
 import 'package:advanced_chess_board/advanced_chess_board.dart';
 // ignore: implementation_imports
 import 'package:advanced_chess_board/src/constants/global_constants.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -38,7 +38,7 @@ void main() {
       //   scaled  = squareSize * kMaxFeedbackScale
       //   clamped = squareSize + kMaxFeedbackOverflowPx
       //   result  = scaled < clamped ? scaled : clamped
-      double feedbackSize(final double squareSize) {
+      double feedbackSize(double squareSize) {
         final scaled = squareSize * kMaxFeedbackScale;
         final clamped = squareSize + kMaxFeedbackOverflowPx;
         return scaled < clamped ? scaled : clamped;
@@ -58,7 +58,7 @@ void main() {
     });
 
     testWidgets('rendered board with controller mounts cleanly',
-        (final tester) async {
+        (tester) async {
       // A smoke test confirming the board constructs without error under the
       // narrow-screen condition that used to expose the overflow visually.
       final controller = ChessBoardController();

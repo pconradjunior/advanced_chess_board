@@ -24,12 +24,12 @@
 // -----------------------------------------------------------------------------
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('§1.22 no GridView in board subtree', () {
-    testWidgets('board subtree contains no GridView', (final tester) async {
+    testWidgets('board subtree contains no GridView', (tester) async {
       final controller = ChessBoardController();
 
       await tester.pumpWidget(

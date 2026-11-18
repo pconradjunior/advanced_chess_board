@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 // Sentinel used by [BoardTheme.copyWith] to distinguish
 // "leave this nullable field untouched" from "set it to null".

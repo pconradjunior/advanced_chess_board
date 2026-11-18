@@ -27,14 +27,14 @@ void main() {
     ).test(
       'prop_verbose_moves_is_destination_oracle: '
       'makeMove accepts iff verbose-moves contain the target',
-      (final String fen, final String from, final String to) {
+      (String fen, String from, String to) {
         final c = ChessBoardController();
         c.loadGameFromFEN(fen, notify: false);
 
         final verbose = c.game
             .generate_moves(<String, String>{'square': from})
             .cast<chess.Move>()
-            .where((final chess.Move m) => m.toAlgebraic == to)
+            .where((chess.Move m) => m.toAlgebraic == to)
             .toList();
 
         // Oracle: does any verbose legal move from `from` land on `to`?
@@ -44,7 +44,7 @@ void main() {
         // promotion argument will reject — so supply 'q' to mirror oracle
         // semantics.
         final needsPromotion =
-            verbose.any((final chess.Move m) => m.promotion != null);
+            verbose.any((chess.Move m) => m.promotion != null);
 
         final fenBefore = c.fen;
         final accepted = c.makeMove(

@@ -3,14 +3,14 @@
 // any hint-arrow lifecycle transition.
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Hint arrow does not mutate arrows list', () {
     testWidgets(
       'P1.27: arrows list is not mutated by hint lifecycle',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         final arrows = <ChessArrow>[
           ChessArrow(startSquare: 'e2', endSquare: 'e4'),

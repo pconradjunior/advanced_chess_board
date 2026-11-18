@@ -16,7 +16,7 @@ import '../properties/generators.dart';
 
 /// Value equality over an arrow list — matches `ChessArrow.operator ==` /
 /// `hashCode`. Used as the oracle for "did the arrows change?".
-bool _arrowsEqual(final List<ChessArrow> a, final List<ChessArrow> b) {
+bool _arrowsEqual(List<ChessArrow> a, List<ChessArrow> b) {
   if (a.length != b.length) {
     return false;
   }
@@ -43,7 +43,7 @@ class _PainterInput {
 extension _PainterInputGen on Any {
   /// Random `(arrows, orientation)` pair.
   Generator<_PainterInput> get painterInput =>
-      (final math.Random random, final int size) {
+      (math.Random random, int size) {
         final arrows =
             any.listWithLengthInRange(0, 6, any.chessArrow)(random, size);
         final orient = any.boardOrientation(random, size);
@@ -61,7 +61,7 @@ void main() {
       any.painterInput,
     ).test(
       'prop_shouldRepaint_iff_semantic_change',
-      (final _PainterInput oldInput, final _PainterInput newInput) {
+      (_PainterInput oldInput, _PainterInput newInput) {
         final oldPainter = ArrowPainter(oldInput.arrows, oldInput.orientation);
         final newPainter = ArrowPainter(newInput.arrows, newInput.orientation);
 

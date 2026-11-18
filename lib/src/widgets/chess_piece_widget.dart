@@ -1,5 +1,5 @@
 import 'package:chess/chess.dart' as chess;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../piece_set/piece_set.dart';
 import '../utils/utils.dart';
@@ -43,7 +43,7 @@ class ChessPieceWidget extends StatelessWidget {
   final VoidCallback? onTap;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(BuildContext context) {
     return Semantics(
       label: pieceSemanticsLabel(piece),
       button: isBoardEnabled,

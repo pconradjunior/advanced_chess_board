@@ -7,7 +7,7 @@ import 'package:advanced_chess_board/advanced_chess_board.dart';
 import 'package:advanced_chess_board/src/constants/global_constants.dart';
 import 'package:advanced_chess_board/src/constants/image_constants.dart';
 import 'package:chess/chess.dart' as chess;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

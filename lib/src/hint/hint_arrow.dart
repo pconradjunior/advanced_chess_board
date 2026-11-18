@@ -50,7 +50,7 @@ class HintArrow {
   final Duration? duration;
 
   @override
-  bool operator ==(final Object other) {
+  bool operator ==(Object other) {
     if (identical(this, other)) return true;
     return other is HintArrow &&
         other.startSquare == startSquare &&

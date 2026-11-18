@@ -10,7 +10,7 @@
 //                        priority, the last-move tint is suppressed).
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 // Yellow alpha used by the board for overlays.
@@ -19,7 +19,7 @@ import 'package:flutter_test/flutter_test.dart';
 const Color _kSelectionYellow = Color(0x9BFFEB3B);
 const Color _kLastMoveYellow = Color(0x80FFEB3B);
 
-Widget _boardHarness(final ChessBoardController c, {final bool enable = true}) {
+Widget _boardHarness(ChessBoardController c, {bool enable = true}) {
   return MaterialApp(
     home: Scaffold(
       body: SizedBox(
@@ -34,10 +34,10 @@ Widget _boardHarness(final ChessBoardController c, {final bool enable = true}) {
   );
 }
 
-int _countOverlays(final WidgetTester tester, final Color color) {
+int _countOverlays(WidgetTester tester, Color color) {
   return find
       .byWidgetPredicate(
-        (final w) => w is ColoredBox && w.color == color,
+        (w) => w is ColoredBox && w.color == color,
       )
       .evaluate()
       .length;
@@ -46,7 +46,7 @@ int _countOverlays(final WidgetTester tester, final Color color) {
 void main() {
   group('Tap & drag interactions', () {
     testWidgets('P1.8 §2.17: tap with enableMoves: false schedules no frame',
-        (final tester) async {
+        (tester) async {
       final c = ChessBoardController();
       await tester.pumpWidget(_boardHarness(c, enable: false));
       await tester.pumpAndSettle();
@@ -63,7 +63,7 @@ void main() {
 
     testWidgets(
         'P1.8 §2.18: tap empty square with no selection schedules no frame',
-        (final tester) async {
+        (tester) async {
       final c = ChessBoardController();
       await tester.pumpWidget(_boardHarness(c));
       await tester.pumpAndSettle();
@@ -82,7 +82,7 @@ void main() {
 
     testWidgets(
         'P1.9 §2.19: after e2-e4, exactly two last-move yellow overlays',
-        (final tester) async {
+        (tester) async {
       final c = ChessBoardController();
       await tester.pumpWidget(_boardHarness(c));
       await tester.pumpAndSettle();
@@ -106,7 +106,7 @@ void main() {
 
     testWidgets(
         'P1.10 §2.20: selecting a last-move square draws exactly ONE yellow '
-        'overlay (selection takes priority)', (final tester) async {
+        'overlay (selection takes priority)', (tester) async {
       final c = ChessBoardController();
       await tester.pumpWidget(_boardHarness(c));
       await tester.pumpAndSettle();
@@ -124,7 +124,7 @@ void main() {
       // on e4, last-move overlay is suppressed for e4; the e2 last-move
       // overlay still renders. Net: 1 selection yellow + 1 last-move yellow.
       final e4DraggableFinder = find.byWidgetPredicate(
-        (final w) => w is Draggable<String> && w.data == 'e4',
+        (w) => w is Draggable<String> && w.data == 'e4',
       );
       expect(e4DraggableFinder, findsOneWidget);
       await tester.tap(e4DraggableFinder);

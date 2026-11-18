@@ -4,7 +4,7 @@
 // flips equality to false.
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart' as ft;
 import 'package:glados/glados.dart';
 
@@ -111,7 +111,7 @@ void main() {
     // lightSquareColor compare equal iff the colors are equal.
     Glados<BoardTheme>(any.boardTheme).test(
       'prop_equality_reflexive: t == t',
-      (final BoardTheme t) {
+      (BoardTheme t) {
         ft.expect(t == t, ft.isTrue);
         ft.expect(t.hashCode, ft.equals(t.hashCode));
       },
@@ -119,7 +119,7 @@ void main() {
 
     Glados2<BoardTheme, BoardTheme>(any.boardTheme, any.boardTheme).test(
       'prop_equality_symmetric: t1 == t2 implies t2 == t1',
-      (final BoardTheme t1, final BoardTheme t2) {
+      (BoardTheme t1, BoardTheme t2) {
         ft.expect(t1 == t2, ft.equals(t2 == t1));
       },
     );

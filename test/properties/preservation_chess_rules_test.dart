@@ -4,7 +4,7 @@
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
 import 'package:chess/chess.dart' as chess;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart' as ft;
 import 'package:glados/glados.dart';
 
@@ -14,7 +14,7 @@ void main() {
   ft.group('Preservation P2.1: chess rules preserved under 3.1.0 params', () {
     Glados<String>(any.chessFen).test(
       'prop_chess_rules_preserved: FEN advances correctly with 3.1.0 params',
-      (final String fen) async {
+      (String fen) async {
         final controllerA = ChessBoardController();
         final controllerB = ChessBoardController();
         controllerA.loadGameFromFEN(fen, notify: false);
@@ -54,7 +54,7 @@ void main() {
 
     ft.testWidgets(
       'P2.1: illegal moves rejected under 3.1.0 params',
-      (final ft.WidgetTester tester) async {
+      (ft.WidgetTester tester) async {
         final controller = ChessBoardController();
         await tester.pumpWidget(
           MaterialApp(
@@ -89,7 +89,7 @@ void main() {
 
     ft.testWidgets(
       'P2.1: legal moves accepted under 3.1.0 params',
-      (final ft.WidgetTester tester) async {
+      (ft.WidgetTester tester) async {
         final controller = ChessBoardController();
         await tester.pumpWidget(
           MaterialApp(

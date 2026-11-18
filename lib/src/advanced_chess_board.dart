@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:chess/chess.dart' as chess;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'chess_board_controller.dart';
 import 'constants/global_constants.dart';
@@ -152,7 +152,7 @@ class AdvancedChessBoard extends StatefulWidget {
   ///
   /// Only available in debug/test builds. Throws if the widget is not mounted.
   @visibleForTesting
-  static BoardTheme effectiveThemeOf(final State<AdvancedChessBoard> state) {
+  static BoardTheme effectiveThemeOf(State<AdvancedChessBoard> state) {
     return (state as _AdvancedChessBoardState)._effectiveTheme;
   }
 }
@@ -228,7 +228,7 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
   }
 
   @override
-  void didUpdateWidget(covariant final AdvancedChessBoard old) {
+  void didUpdateWidget(covariant AdvancedChessBoard old) {
     super.didUpdateWidget(old);
     if (old.controller != widget.controller) {
       _selectedSquare = null;
@@ -252,7 +252,7 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
     super.dispose();
   }
 
-  void _reconcileHint(final HintArrow? next) {
+  void _reconcileHint(HintArrow? next) {
     if (next == null) {
       if (_activeHint != null) {
         setState(() {
@@ -281,9 +281,9 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (final BuildContext ctx, final BoxConstraints boxConstraints) {
+      builder: (BuildContext ctx, BoxConstraints boxConstraints) {
         final side = min(boxConstraints.maxWidth, boxConstraints.maxHeight);
         final squareSize = side / 8;
 
@@ -304,10 +304,10 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
     );
   }
 
-  Widget _buildBoardWithStack(final double squareSize) {
+  Widget _buildBoardWithStack(double squareSize) {
     return ListenableBuilder(
       listenable: widget.controller,
-      builder: (final BuildContext context, final Widget? _) {
+      builder: (BuildContext context, Widget? _) {
         // Dismiss hint on any successful move (including programmatic ones).
         final currentMoveCount = widget.controller.moveCount;
         if (currentMoveCount != _lastMoveCount && _activeHint != null) {
@@ -366,7 +366,7 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
     );
   }
 
-  Widget _buildWithOutsideGutter(final double squareSize) {
+  Widget _buildWithOutsideGutter(double squareSize) {
     final gutterSize = max(kMinLabelFontSize * 2, squareSize * 0.36);
     final ranks = widget.boardOrientation == PlayerColor.white
         ? const <String>['8', '7', '6', '5', '4', '3', '2', '1']
@@ -376,8 +376,8 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
         : files.reversed.toList(growable: false);
     return LayoutBuilder(
       builder: (
-        final BuildContext ctx,
-        final BoxConstraints outerConstraints,
+        BuildContext ctx,
+        BoxConstraints outerConstraints,
       ) {
         // Clamp gutter to at most half the available width/height to prevent
         // overflow on very narrow boards (Requirement 3.10).
@@ -403,8 +403,8 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
                   Expanded(
                     child: LayoutBuilder(
                       builder: (
-                        final BuildContext innerCtx,
-                        final BoxConstraints innerConstraints,
+                        BuildContext innerCtx,
+                        BoxConstraints innerConstraints,
                       ) {
                         final innerSide = min(
                           innerConstraints.maxWidth,
@@ -439,7 +439,7 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
 
   /// Returns `true` when [to] is a legal destination from [from] using the
   /// `chess` engine's verbose move generation — no SAN substring matching.
-  bool _isLegalDestination(final String from, final String to) {
+  bool _isLegalDestination(String from, String to) {
     for (final m in _game.generate_moves(<String, String>{squareKey: from})) {
       if (m.toAlgebraic == to) return true;
     }
@@ -447,9 +447,9 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
   }
 
   Future<bool> _makeMove(
-    final String from,
-    final String to,
-    final double squareSize,
+    String from,
+    String to,
+    double squareSize,
   ) async {
     final String? promotion = _isPromotionMove(from, to)
         ? pieceTypeToString(await _showPromotionDialog(context, squareSize))
@@ -495,11 +495,11 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
     return accepted;
   }
 
-  void _firePlay(final SoundEvent event) {
+  void _firePlay(SoundEvent event) {
     try {
       widget.soundPack
           .play(event)
-          .catchError((final Object err, final StackTrace st) {
+          .catchError((Object err, StackTrace st) {
         debugPrint('SoundPack.play($event) threw asynchronously: $err');
       });
     } catch (err) {
@@ -507,7 +507,7 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
     }
   }
 
-  bool _isPromotionMove(final String from, final String to) {
+  bool _isPromotionMove(String from, String to) {
     final piece = _game.get(from);
     return piece != null &&
         piece.type == chess.PieceType.PAWN &&
@@ -515,13 +515,13 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
             (piece.color == chess.Color.BLACK && to[1] == '1'));
   }
 
-  Widget _buildChessBoard(final double squareSize) {
+  Widget _buildChessBoard(double squareSize) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: List<Widget>.generate(8, (final int row) {
+      children: List<Widget>.generate(8, (int row) {
         return Row(
           mainAxisSize: MainAxisSize.min,
-          children: List<Widget>.generate(8, (final int col) {
+          children: List<Widget>.generate(8, (int col) {
             final rank = widget.boardOrientation == PlayerColor.white
                 ? (7 - row) + 1
                 : row + 1;
@@ -553,10 +553,10 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
   }
 
   Widget _buildSquareWithDragTarget(
-    final String square,
-    final Color squareColor,
-    final Color invertColor,
-    final double squareSize,
+    String square,
+    Color squareColor,
+    Color invertColor,
+    double squareSize,
   ) {
     final piece = _game.get(square);
     final hasPiece = piece != null;
@@ -568,9 +568,9 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
         !isSelected; // avoid double-tinting
 
     return DragTarget<String>(
-      onWillAcceptWithDetails: (final DragTargetDetails<String> details) =>
+      onWillAcceptWithDetails: (DragTargetDetails<String> details) =>
           _isLegalDestination(details.data, square),
-      onAcceptWithDetails: (final DragTargetDetails<String> details) async {
+      onAcceptWithDetails: (DragTargetDetails<String> details) async {
         _suppressNextAnimation = true;
         await _makeMove(details.data, square, squareSize);
         setState(() {
@@ -579,9 +579,9 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
         });
       },
       builder: (
-        final BuildContext ctx,
-        final List<String?> candidateData,
-        final List<dynamic> rejectedData,
+        BuildContext ctx,
+        List<String?> candidateData,
+        List<dynamic> rejectedData,
       ) {
         final isDragSource = _isPieceDragging && square == _selectedSquare;
         final isDragLegalHover =
@@ -645,16 +645,16 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
     );
   }
 
-  bool _isLastMoveSquare(final String square) {
+  bool _isLastMoveSquare(String square) {
     if (_game.history.isEmpty) return false;
     final lastMove = _game.history.last.move;
     return square == lastMove.fromAlgebraic || square == lastMove.toAlgebraic;
   }
 
   Widget _buildPiece(
-    final String square,
-    final double squareSize,
-    final chess.Piece piece,
+    String square,
+    double squareSize,
+    chess.Piece piece,
   ) {
     // Clamp the drag-feedback size so it never overflows the square by more
     // than `kMaxFeedbackOverflowPx` — critical on narrow boards.
@@ -700,8 +700,8 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
   }
 
   Future<void> _handleTap(
-    final String square,
-    final double squareSize,
+    String square,
+    double squareSize,
   ) async {
     if (!widget.enableMoves) return;
     final tappedPiece = _game.get(square);
@@ -738,7 +738,7 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
     });
   }
 
-  void _setSelectedSquareAndFindLegalMoves(final String square) {
+  void _setSelectedSquareAndFindLegalMoves(String square) {
     _selectedSquare = square;
     _legalMoves = <String>{
       for (final m in _game.generate_moves(<String, String>{squareKey: square}))
@@ -747,12 +747,12 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
   }
 
   Future<chess.PieceType> _showPromotionDialog(
-    final BuildContext context,
-    final double squareSize,
+    BuildContext context,
+    double squareSize,
   ) async {
     return await showDialog<chess.PieceType>(
           context: context,
-          builder: (final BuildContext context) {
+          builder: (BuildContext context) {
             return AlertDialog(
               content: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -761,7 +761,7 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
                   chess.PieceType.ROOK,
                   chess.PieceType.BISHOP,
                   chess.PieceType.KNIGHT,
-                ].map((final chess.PieceType pieceType) {
+                ].map((chess.PieceType pieceType) {
                   return ChessPieceWidget(
                     piece: chess.Piece(pieceType, _game.turn),
                     squareSize: squareSize,
@@ -777,7 +777,7 @@ class _AdvancedChessBoardState extends State<AdvancedChessBoard> {
         chess.PieceType.QUEEN;
   }
 
-  Widget _buildKingStateOverlay(final chess.Piece piece) {
+  Widget _buildKingStateOverlay(chess.Piece piece) {
     if (piece.type != chess.PieceType.KING || piece.color != _game.turn) {
       return const SizedBox.shrink();
     }
@@ -808,7 +808,7 @@ class _DragLegalRing extends StatelessWidget {
   final double squareSize;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(BuildContext context) {
     final circleSize = squareSize * 0.98;
     return Align(
       child: Container(
@@ -853,7 +853,7 @@ class _CoordinateGutter extends StatelessWidget {
   final Color? labelColor;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(BuildContext context) {
     final fontSize = max(kMinLabelFontSize, squareSize * 0.18);
     final textStyle = TextStyle(
       fontSize: fontSize,
@@ -863,7 +863,7 @@ class _CoordinateGutter extends StatelessWidget {
 
     final children = labels
         .map(
-          (final String l) => Expanded(
+          (String l) => Expanded(
             child: Center(
               child: Text(l, style: textStyle),
             ),
@@ -892,7 +892,7 @@ class _InFlightMove {
   final chess.Piece piece;
 
   @override
-  bool operator ==(final Object other) =>
+  bool operator ==(Object other) =>
       other is _InFlightMove &&
       other.from == from &&
       other.to == to &&

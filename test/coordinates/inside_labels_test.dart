@@ -4,14 +4,14 @@
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
 import 'package:advanced_chess_board/src/widgets/chess_square.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('CoordinateLabels.inside label placement', () {
     testWidgets(
       'white orientation: rank labels on a-file, file labels on rank 1',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         await tester.pumpWidget(
           MaterialApp(
@@ -41,7 +41,7 @@ void main() {
             final square = '$file$rank';
             final squareWidget = tester.widget<ChessSquare>(
               find.byWidgetPredicate(
-                (final w) => w is ChessSquare && w.square == square,
+                (w) => w is ChessSquare && w.square == square,
               ),
             );
             // Rank label should appear only on a-file.
@@ -74,7 +74,7 @@ void main() {
 
     testWidgets(
       'black orientation: rank labels on h-file, file labels on rank 8',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         await tester.pumpWidget(
           MaterialApp(
@@ -114,7 +114,7 @@ void main() {
 
     testWidgets(
       'none mode: no labels rendered inside squares',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         final controller = ChessBoardController();
         await tester.pumpWidget(
           MaterialApp(

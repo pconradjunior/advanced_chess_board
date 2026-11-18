@@ -5,7 +5,7 @@
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
 import 'package:chess/chess.dart' as chess;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart' as ft;
 import 'package:glados/glados.dart';
 
@@ -15,7 +15,7 @@ void main() {
   ft.group('Preservation P2.2: controller semantics preserved', () {
     Glados<String>(any.chessFen).test(
       'prop_notify_false_suppresses_under_3_1_0',
-      (final String fen) {
+      (String fen) {
         final c = ChessBoardController();
         c.loadGameFromFEN(fen, notify: false);
 
@@ -53,7 +53,7 @@ void main() {
 
     ft.testWidgets(
       'controller swap clears selection state',
-      (final ft.WidgetTester tester) async {
+      (ft.WidgetTester tester) async {
         final controllerA = ChessBoardController();
         final controllerB = ChessBoardController();
 

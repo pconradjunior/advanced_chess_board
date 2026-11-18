@@ -6,7 +6,7 @@ import 'dart:math' as math;
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
 import 'package:advanced_chess_board/src/constants/global_constants.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -17,7 +17,7 @@ void main() {
 
       testWidgets(
         'P1.14: inside labels at boardSize=$boardSize have fontSize=$expectedFontSize',
-        (final WidgetTester tester) async {
+        (WidgetTester tester) async {
           final controller = ChessBoardController();
           await tester.pumpWidget(
             MaterialApp(
@@ -37,7 +37,7 @@ void main() {
 
           // Find all coordinate label Text widgets.
           final labelFinder = find.byWidgetPredicate(
-            (final w) =>
+            (w) =>
                 w is Text &&
                 w.data != null &&
                 RegExp(r'^[a-h]$|^[1-8]$').hasMatch(w.data!),
@@ -62,7 +62,7 @@ void main() {
 
     testWidgets(
       'P1.14: font floor is kMinLabelFontSize on very small boards',
-      (final WidgetTester tester) async {
+      (WidgetTester tester) async {
         // Very small board where squareSize * 0.18 < kMinLabelFontSize.
         const boardSize = 40.0; // squareSize = 5, 5 * 0.18 = 0.9 < 9
         final controller = ChessBoardController();
@@ -83,7 +83,7 @@ void main() {
         await tester.pumpAndSettle();
 
         final labelFinder = find.byWidgetPredicate(
-          (final w) =>
+          (w) =>
               w is Text &&
               w.data != null &&
               RegExp(r'^[a-h]$|^[1-8]$').hasMatch(w.data!),

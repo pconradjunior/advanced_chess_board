@@ -66,7 +66,7 @@ class ChessBoardController extends ChangeNotifier {
   /// Reset the board to the standard starting position.
   ///
   /// Fires registered listeners unless `notify` is `false`.
-  void resetBoard({final bool notify = true}) {
+  void resetBoard({bool notify = true}) {
     _game.reset();
     if (notify) {
       notifyListeners();
@@ -81,10 +81,10 @@ class ChessBoardController extends ChangeNotifier {
   /// Returns `true` when the move is accepted (legal), `false` otherwise.
   /// On success, fires listeners unless `notify` is `false`.
   bool makeMove({
-    required final String from,
-    required final String to,
-    final String? promotion,
-    final bool notify = true,
+    required String from,
+    required String to,
+    String? promotion,
+    bool notify = true,
   }) {
     final moveMade = promotion != null
         ? _game.move({fromKey: from, toKey: to, promotionKey: promotion})
@@ -101,7 +101,7 @@ class ChessBoardController extends ChangeNotifier {
   /// Undo the last move.
   ///
   /// No-op when history is empty. Fires listeners unless `notify` is `false`.
-  void undo({final bool notify = true}) {
+  void undo({bool notify = true}) {
     _game.undo();
     if (notify) {
       notifyListeners();
@@ -111,7 +111,7 @@ class ChessBoardController extends ChangeNotifier {
   /// Load a position from a FEN string.
   ///
   /// Fires listeners unless `notify` is `false`.
-  void loadGameFromFEN(final String fen, {final bool notify = true}) {
+  void loadGameFromFEN(String fen, {bool notify = true}) {
     _game.load(fen);
     if (notify) {
       notifyListeners();

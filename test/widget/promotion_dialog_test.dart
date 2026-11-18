@@ -8,14 +8,14 @@
 import 'package:advanced_chess_board/advanced_chess_board.dart';
 // ignore: implementation_imports
 import 'package:advanced_chess_board/src/widgets/chess_square.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Promotion dialog', () {
     for (final double squareSize in <double>[28, 64, 96, 128]) {
       testWidgets('P1.13 §2.24: dialog pieces sized to squareSize=$squareSize',
-          (final tester) async {
+          (tester) async {
         final c = ChessBoardController();
         final boardSize = squareSize * 8;
 
@@ -48,7 +48,7 @@ void main() {
 
         // Tap the e7 pawn to select it (opens legal-destination highlights).
         final pawnFinder = find.byWidgetPredicate(
-          (final w) => w is Draggable<String> && w.data == 'e7',
+          (w) => w is Draggable<String> && w.data == 'e7',
         );
         expect(pawnFinder, findsOneWidget,
             reason: 'e7 pawn Draggable must exist before promotion');
@@ -58,7 +58,7 @@ void main() {
         // Tap e8 to commit the move. Since e8 is empty, _handleTap('e8')
         // reaches _makeMove('e7','e8') which shows the promotion dialog.
         final e8SquareFinder = find.byWidgetPredicate(
-          (final w) => w is ChessSquare && w.square == 'e8',
+          (w) => w is ChessSquare && w.square == 'e8',
         );
         expect(e8SquareFinder, findsOneWidget);
         await tester.tapAt(tester.getCenter(e8SquareFinder));
@@ -80,7 +80,7 @@ void main() {
         final sizedBoxesInDialog = find.descendant(
           of: dialogFinder,
           matching: find.byWidgetPredicate(
-            (final w) =>
+            (w) =>
                 w is SizedBox &&
                 w.width != null &&
                 (w.width! - squareSize).abs() < 0.5 &&

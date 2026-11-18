@@ -24,13 +24,13 @@
 // -----------------------------------------------------------------------------
 
 import 'package:advanced_chess_board/advanced_chess_board.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('§1.8 widget auto-rebuild on controller mutation', () {
     testWidgets('board reflects makeMove without external addListener',
-        (final tester) async {
+        (tester) async {
       final controller = ChessBoardController();
       await tester.pumpWidget(
         MaterialApp(
@@ -46,7 +46,7 @@ void main() {
 
       // Find the Draggable for the e2 pawn before the move.
       final e2BeforeFinder = find.byWidgetPredicate(
-        (final w) => w is Draggable<String> && w.data == 'e2',
+        (w) => w is Draggable<String> && w.data == 'e2',
       );
       expect(e2BeforeFinder, findsOneWidget,
           reason: 'pawn draggable for e2 exists before the move');
@@ -59,10 +59,10 @@ void main() {
 
       // After the move, the pawn's draggable should be on e4, not e2.
       final e2AfterFinder = find.byWidgetPredicate(
-        (final w) => w is Draggable<String> && w.data == 'e2',
+        (w) => w is Draggable<String> && w.data == 'e2',
       );
       final e4AfterFinder = find.byWidgetPredicate(
-        (final w) => w is Draggable<String> && w.data == 'e4',
+        (w) => w is Draggable<String> && w.data == 'e4',
       );
 
       expect(

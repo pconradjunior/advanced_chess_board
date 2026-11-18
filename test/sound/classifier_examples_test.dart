@@ -13,7 +13,7 @@ void main() {
       // e2-e4 from starting position.
       final moves = game.generate_moves();
       final e2e4 = moves.firstWhere(
-        (final m) => m.fromAlgebraic == 'e2' && m.toAlgebraic == 'e4',
+        (m) => m.fromAlgebraic == 'e2' && m.toAlgebraic == 'e4',
       );
       game.make_move(e2e4);
       final event = classifySoundEvent(
@@ -31,7 +31,7 @@ void main() {
       );
       final moves = game.generate_moves();
       final capture = moves.firstWhere(
-        (final m) => m.fromAlgebraic == 'e4' && m.toAlgebraic == 'd5',
+        (m) => m.fromAlgebraic == 'e4' && m.toAlgebraic == 'd5',
       );
       game.make_move(capture);
       final event = classifySoundEvent(
@@ -49,7 +49,7 @@ void main() {
       );
       final moves = game.generate_moves();
       final castle = moves.firstWhere(
-        (final m) => m.fromAlgebraic == 'e1' && m.toAlgebraic == 'g1',
+        (m) => m.fromAlgebraic == 'e1' && m.toAlgebraic == 'g1',
       );
       game.make_move(castle);
       final event = classifySoundEvent(
@@ -67,7 +67,7 @@ void main() {
       );
       final moves = game.generate_moves();
       final promote = moves.firstWhere(
-        (final m) =>
+        (m) =>
             m.fromAlgebraic == 'a7' &&
             m.toAlgebraic == 'a8' &&
             m.promotion == chess.PieceType.QUEEN,
@@ -87,24 +87,24 @@ void main() {
       final moves1 = game.generate_moves();
       game.make_move(
         moves1.firstWhere(
-          (final m) => m.fromAlgebraic == 'f2' && m.toAlgebraic == 'f3',
+          (m) => m.fromAlgebraic == 'f2' && m.toAlgebraic == 'f3',
         ),
       );
       final moves2 = game.generate_moves();
       game.make_move(
         moves2.firstWhere(
-          (final m) => m.fromAlgebraic == 'e7' && m.toAlgebraic == 'e5',
+          (m) => m.fromAlgebraic == 'e7' && m.toAlgebraic == 'e5',
         ),
       );
       final moves3 = game.generate_moves();
       game.make_move(
         moves3.firstWhere(
-          (final m) => m.fromAlgebraic == 'g2' && m.toAlgebraic == 'g4',
+          (m) => m.fromAlgebraic == 'g2' && m.toAlgebraic == 'g4',
         ),
       );
       final moves4 = game.generate_moves();
       final mateMove = moves4.firstWhere(
-        (final m) => m.fromAlgebraic == 'd8' && m.toAlgebraic == 'h4',
+        (m) => m.fromAlgebraic == 'd8' && m.toAlgebraic == 'h4',
       );
       game.make_move(mateMove);
 

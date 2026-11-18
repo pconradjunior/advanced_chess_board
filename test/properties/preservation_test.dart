@@ -27,7 +27,7 @@ import 'package:advanced_chess_board/advanced_chess_board.dart';
 // mirroring `test/painter/arrow_painter_test.dart`.
 import 'package:advanced_chess_board/src/utils/arrow_geometry.dart';
 import 'package:chess/chess.dart' as chess;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart' as ft;
 import 'package:glados/glados.dart';
 
@@ -50,7 +50,7 @@ void main() {
     // -----------------------------------------------------------------------
     Glados<String>(any.chessFen).test(
       'prop_fen_roundtrip: loadGameFromFEN(F); controller.fen == canonicalise(F)',
-      (final String fen) {
+      (String fen) {
         final c = ChessBoardController();
         c.loadGameFromFEN(fen, notify: false);
         // `canonicalise(F)` is the engine's own normalisation — i.e. whatever
@@ -72,7 +72,7 @@ void main() {
     // -----------------------------------------------------------------------
     Glados<String>(any.chessFen).test(
       'prop_move_undo_identity: fenOf(P) == fenOf(P.makeMove(m).undo())',
-      (final String fen) {
+      (String fen) {
         final c = ChessBoardController();
         c.loadGameFromFEN(fen, notify: false);
         final before = c.fen;
@@ -106,7 +106,7 @@ void main() {
     // -----------------------------------------------------------------------
     Glados<String>(any.chessFen).test(
       'prop_illegal_move_rejected: makeMove returns false and fen unchanged',
-      (final String fen) {
+      (String fen) {
         final c = ChessBoardController();
         c.loadGameFromFEN(fen, notify: false);
         final before = c.fen;
@@ -227,7 +227,7 @@ void main() {
     // -----------------------------------------------------------------------
     Glados<String>(any.chessFen).test(
       'prop_notify_false_suppresses: zero notifications on any mutating call',
-      (final String fen) {
+      (String fen) {
         final c = ChessBoardController();
         c.loadGameFromFEN(fen, notify: false);
 
@@ -294,7 +294,7 @@ void main() {
     ).test(
       'prop_arrow_geometry_preserved: expected formulas hold for every '
       '(from, to, orientation) triple',
-      (final String from, final String to, final PlayerColor orientation) {
+      (String from, String to, PlayerColor orientation) {
         if (from == to) return; // zero-length vector is not a real arrow.
 
         const boardSide = 320.0;
@@ -419,7 +419,7 @@ void main() {
     Glados<String>(any.chessFen).test(
       'prop_escape_hatch_preserved: identical(c.game, c.game) across '
       'arbitrary mutation sequences',
-      (final String fen) {
+      (String fen) {
         final c = ChessBoardController();
         final initialGame = c.game;
         c.loadGameFromFEN(fen, notify: false);
@@ -463,7 +463,7 @@ void main() {
     ft.testWidgets(
       'prop_checkmate_tint_preserved: mated king square renders '
       'Colors.red.withAlpha(155) behind the king piece',
-      (final ft.WidgetTester tester) async {
+      (ft.WidgetTester tester) async {
         final c = ChessBoardController()
           ..loadGameFromFEN(_kFoolsMateFen, notify: false);
         await tester.pumpWidget(
@@ -486,7 +486,7 @@ void main() {
 
         // Exactly one checkmate-tint ColoredBox renders.
         final tintFinder = ft.find.byWidgetPredicate(
-          (final Widget w) => w is ColoredBox && w.color == _kCheckmateTint,
+          (Widget w) => w is ColoredBox && w.color == _kCheckmateTint,
         );
         ft.expect(tintFinder, ft.findsOneWidget,
             reason: 'exactly one red-tint overlay on the mated king square');
@@ -507,7 +507,7 @@ void main() {
         // The king piece image on e1 must still render (piece widget draws
         // ON TOP of the tint — §1.21 / §3.3).
         final kingDraggable = ft.find.byWidgetPredicate(
-          (final Widget w) => w is Draggable<String> && w.data == 'e1',
+          (Widget w) => w is Draggable<String> && w.data == 'e1',
         );
         ft.expect(kingDraggable, ft.findsOneWidget,
             reason: 'king piece widget still renders on top of the tint');
@@ -524,7 +524,7 @@ void main() {
   ft.group('P2.8 enableMoves: false is render-only', () {
     ft.testWidgets(
       'prop_enable_moves_false_is_render_only: taps & drags do not mutate FEN',
-      (final ft.WidgetTester tester) async {
+      (ft.WidgetTester tester) async {
         final c = ChessBoardController();
         final startingFen = c.fen;
 
